@@ -21,7 +21,7 @@ def convert_json(folder=None):
     # Raw translation JSONs that are hand-edited
     folder = folder or Path(__file__).parent / "assets" / "translations"
     # Location of compiled static translation assets
-    out_folder = folder / ".." / ".." / "theme" / "sphinx_book_theme" / "static"
+    out_folder = folder / ".." / ".." / "theme" / "tskit_book_theme" / "static"
 
     # compile po
     for path in (folder / "jsons").glob("*.json"):

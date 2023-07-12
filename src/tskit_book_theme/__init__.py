@@ -13,12 +13,12 @@ from pydata_sphinx_theme.utils import get_theme_options_dict
 
 from .nodes import SideNoteNode
 from .header_buttons import (
-    prep_header_buttons,
-    add_header_buttons,
+   prep_header_buttons,
+   add_header_buttons,
     update_sourcename,
     update_context_with_repository_info,
 )
-from .header_buttons.launch import add_launch_buttons
+#from .header_buttons.launch import add_launch_buttons
 from .header_buttons.source import add_source_buttons
 from ._transforms import HandleFootnoteTransform
 
@@ -33,7 +33,7 @@ MESSAGE_CATALOG_NAME = "booktheme"
 def get_html_theme_path():
     """Return list of HTML theme paths."""
     parent = Path(__file__).parent.resolve()
-    theme_path = parent / "theme" / "sphinx_book_theme"
+    theme_path = parent / "theme" / "tskit_book_theme"
     return theme_path
 
 
@@ -111,12 +111,12 @@ def hash_html_assets(app, pagename, templatename, context, doctree):
 
     The source files are in `static` while the built HTML is in `_static`.
     """
-    assets = ["scripts/sphinx-book-theme.js"]
+    assets = ["scripts/tskit-book-theme.js"]
     # Only append the book theme CSS if it's explicitly this theme. Sub-themes
     # will define their own CSS file, so if a sub-theme is used, this code is
     # run but the book theme CSS file won't be linked in Sphinx.
-    if app.config.html_theme == "sphinx_book_theme":
-        assets.append("styles/sphinx-book-theme.css")
+    if app.config.html_theme == "tskit_book_theme":
+        assets.append("styles/tskit-book-theme.css")
     hash_assets_for_files(assets, get_html_theme_path() / "static", context)
 
 
@@ -223,8 +223,8 @@ def update_templates(app, pagename, templatename, context, doctree):
 def setup(app: Sphinx):
     # Register theme
     theme_dir = get_html_theme_path()
-    app.add_html_theme("sphinx_book_theme", theme_dir)
-    app.add_js_file("scripts/sphinx-book-theme.js")
+    app.add_html_theme("tskit_book_theme", theme_dir)
+    app.add_js_file("scripts/tskit-book-theme.js")
 
     # Translations
     locale_dir = os.path.join(theme_dir, "static", "locales")
@@ -246,12 +246,12 @@ def setup(app: Sphinx):
     # Header buttons
     app.connect("html-page-context", prep_header_buttons)
     # Bump priority so that it runs after the pydata theme sets up the edit URL func.
-    app.connect("html-page-context", add_launch_buttons, priority=501)
+#     app.connect("html-page-context", add_launch_buttons, priority=501)
     app.connect("html-page-context", add_source_buttons, priority=501)
-    app.connect("html-page-context", add_header_buttons, priority=501)
+#     app.connect("html-page-context", add_header_buttons, priority=501)
 
     # Directives
-    app.add_directive("margin", Margin)
+    #app.add_directive("margin", Margin)
 
     # Post-transforms
     app.add_post_transform(HandleFootnoteTransform)
